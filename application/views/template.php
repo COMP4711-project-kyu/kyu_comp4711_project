@@ -62,13 +62,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						    {menubar}
 
 							<script type="text/javascript" src="js/responsive-nav.js"></script>
-				    </div>							
+				    </div>	
+                                         
 	    		    <div class="clear"></div>
 	    	    </div>
-	            
+                             
+                              <div class="header_right">
+				   <ul class="icon1 sub-icon1 profile_img">
+					 <li><a class="active-icon c1" href="#"> </a>
+						<ul class="sub-icon1 list">
+						  <div class="product_control_buttons">
+						  	Login if you are a member
+						  </div>
+						</ul>
+					 </li>
+				   </ul>
+		        <div class="clear"></div>
+	       </div>
 	      </div>
 		 </div>
+                   
 	    </div>
+            
 	  </div>
           {content}
 	  <div class="footer">
@@ -76,8 +91,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				
 				    <div class="copy">
 			           <p>© 2014 Template by <a href="http://w3layouts.com" target="_blank">w3layouts</a></p>
+                              
 		            
    				</div>
+                            <div class="search-box">
+                            <a href="#" class="login">Login</a>
+                            </div>
+
 			</div>
 		</div>
 </body>	
