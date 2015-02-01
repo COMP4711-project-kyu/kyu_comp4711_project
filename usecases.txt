@@ -1,0 +1,24 @@
+Pages
+
+Home
+Admin will be able to update “Announcement" section but "Recent Pictures" and “Updates" are updated automatically.
+
+Team
+Admin will be able to update “about dragons”, picture under “about dragons”, “schedule”, and “Coach” and “Captain” section. If coach or captain logs in, they will be able to modify their sections.
+
+Gallery
+There will be images database and images are populated from database. If user logs in as member they will be able to add pictures.
+
+Contact
+Admin will be able to modify the address of google map, content in the right side of google map and the email address where the messages are sent to.
+
+
+Usecases
+
+1. Image datas in Gallery page are populated from model and could select which pictures to show by selecting dropdown list. By default, the most resent updated pictures are shown.
+
+2. Schedule will be populated from their league's website
+
+3. Logged in users will modify data.
+
+4. Updates will be created whenever logged in users modify data, stored in database and auto populated in Home page.sca

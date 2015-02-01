@@ -94,9 +94,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                               
 		            
    				</div>
-                            <div class="search-box">
-                            <a href="#" class="login">Login</a>
-                            </div>
 
 			</div>
 		</div>

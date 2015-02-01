@@ -972,7 +972,7 @@ li.youtube a span {
 .dropdown input[type="checkbox"]:checked ~ .dropdown_content { display: block }
 .dropdown input[type="checkbox"] { display: none }
 .copy {
-  float: left;
+  float: right;
 }
 .copy p{
 	font-size:0.8125em;
@@ -980,6 +980,11 @@ li.youtube a span {
 	color:#B8B6B6;
 }
 .copy p a{
+	color:#fff;
+}
+
+.login {
+  float: right;
 	color:#fff;
 }
 .footer_bottom{

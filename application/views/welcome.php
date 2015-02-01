@@ -73,6 +73,7 @@
 
 
                 <div class="col-md-6">
+                    <ul class="team_list">
                     <h4>Recent Pictures</h4>
                     <div class="row ex_box">
                         <div class="col-md-6 team1">
@@ -103,6 +104,7 @@
                                 </a></div>
                         </div>
                     </div>
+                    </ul>
                     </div>
                 </div>
 
