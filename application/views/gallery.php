@@ -27,63 +27,13 @@
 				               </ul>
 				         </dd>
                                 </dl>
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e1.jpg" data-fancybox-group="gallery" title=""><img src="images/es1.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e2.jpg" data-fancybox-group="gallery" title=""><img src="images/es2.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e3.jpg" data-fancybox-group="gallery" title=""><img src="images/es3.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
+				{img_row1}
 		    </div>
 		    <div class="row ex_box">
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e4.jpg" data-fancybox-group="gallery" title=""><img src="images/es4.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e5.jpg" data-fancybox-group="gallery" title=""><img src="images/es5.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e6.jpg" data-fancybox-group="gallery" title=""><img src="images/es6.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
+				{img_row2}
 		    </div>
 		    <div class="row ex_box">
-			   <div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e7.jpg" data-fancybox-group="gallery" title=""><img src="images/es7.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e8.jpg" data-fancybox-group="gallery" title=""><img src="images/es8.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
-				</div>
-				<div class="col-md-4 team1">
-				<div class="img_section magnifier2">
-				  <a class="fancybox" href="images/e9.jpg" data-fancybox-group="gallery" title=""><img src="images/es9.jpg" class="img-responsive" alt=""><span> </span>
-					
-				</a></div>
+			  {img_row3}
 			   </div>
 		    </div>
                     <div style="display: table;margin: 0 auto;">

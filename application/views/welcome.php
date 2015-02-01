@@ -61,12 +61,7 @@
                         
                     
                         <h4>Updates</h4>
-                        <li><a href="/team">Coach Comment updated</a>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm......</p></li>
-                        <li><a href="/team">Upcoming Schedule updated</a>
-                            <p>Saturday September 15 Dragons vs Bros Time:8:30 Location:Holy Park</p></li>
-                        <li><a href="/">Captain Comment updated</a>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm......</p></li>
+                        {updates}
                         
                     </ul>
                 </div>
@@ -76,33 +71,11 @@
                     <ul class="team_list">
                     <h4>Recent Pictures</h4>
                     <div class="row ex_box">
-                        <div class="col-md-6 team1">
-                            <div class="img_section magnifier2">
-                                <a class="fancybox" href="images/e1.jpg" data-fancybox-group="gallery" title=""><img src="images/es1.jpg" class="img-responsive" alt=""><span> </span>
-
-                                </a></div>
-                        </div>
-                        <div class="col-md-6 team1">
-                            <div class="img_section magnifier2">
-                                <a class="fancybox" href="images/e2.jpg" data-fancybox-group="gallery" title=""><img src="images/es2.jpg" class="img-responsive" alt=""><span> </span>
-
-                                </a></div>
-                        </div>
+                       {img_row1}
                         </div>
                     
                     <div class="row ex_box">
-                        <div class="col-md-6 team1">
-                            <div class="img_section magnifier2">
-                                <a class="fancybox" href="images/e4.jpg" data-fancybox-group="gallery" title=""><img src="images/es4.jpg" class="img-responsive" alt=""><span> </span>
-
-                                </a></div>
-                        </div>
-                        <div class="col-md-6 team1">
-                            <div class="img_section magnifier2">
-                                <a class="fancybox" href="images/e5.jpg" data-fancybox-group="gallery" title=""><img src="images/es5.jpg" class="img-responsive" alt=""><span> </span>
-
-                                </a></div>
-                        </div>
+                       {img_row2}
                     </div>
                     </ul>
                     </div>
