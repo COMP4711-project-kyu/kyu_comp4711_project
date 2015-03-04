@@ -11,18 +11,18 @@ class Welcome extends Application {
 	 */
 	public function index()
 	{
-            
-
-            // get recent pictures            
-            $pix = $this->images->recent();
-            $num = 1;
-            for ($index = 0; $index < 3;  $num++){
+            // get recent pictures
+            $highest = $this->images->highest();
+            $pix = $this->images->getGroup($highest,4);
+            for ($num = 1, $index = 0; $num <= 2; $num++){
                 $row ="";
-                // set in a cell
-                for($i = 0; $i<2 ;$i++, $index++){
+                // set 3 image in a cell for row
+                for($count = 0; $count < 2; $count++ ){
                     $row .= $this->parser->parse ('_cell_2',(array) $pix[$index], true);
+                    $index++;
                 }
                 $name = 'img_row'.$num;
+                // set img_row$num 
                $this->data[$name] = $row;
             }
             
