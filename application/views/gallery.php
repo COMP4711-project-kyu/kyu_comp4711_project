@@ -1,6 +1,6 @@
 <!-- light-box -->
-	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
+	<script type="text/javascript" src="assets/js/jquery.fancybox.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css" media="screen" />
    <script type="text/javascript">
 		$(document).ready(function() {
 			/*
@@ -34,12 +34,13 @@
 		    </div>
 		    <div class="row ex_box">
 			  {img_row3}
-			   </div>
-		    </div>
+                    </div>
+                        
+</div>
                     <div style="display: table;margin: 0 auto;">
-           <img src="images/arrowleft.png" >
+           <img src="assets/images/arrowleft.png" >
                         1/5
-                        <img src="images/arrowright.png" >
+                        <img src="assets/images/arrowright.png" >
                     
                     </div>
 	   </div>

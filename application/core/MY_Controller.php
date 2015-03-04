@@ -24,13 +24,21 @@ class Application extends CI_Controller {
         $this->data['pagetitle'] = 'Van Dragons';
     }
 
-     function render($pagetitle)
+     function render($pagetitle, $role = "")
     {
         $this->data['menubar'] = build_menu_bar($this->choices, $pagetitle);
         if(strcmp($pagetitle,"Home") == 0 ){
             $pagetitle = "";
         }else{ 
             $pagetitle .=" - ";
+        }
+        
+        if(strcmp($role ,"admin") == 0){
+            $this->data["role_color"] = "#680000" ;
+        }else if(strcmp($role,"team")==0){
+            $this->data["role_color"] = "#003399" ;
+        }else{
+            $this->data['role_color'] = "#000";
         }
         $this->data['pagetitle'] = $pagetitle.'Van Dragons';
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
