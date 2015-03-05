@@ -6,18 +6,21 @@
  *
  * @author Mao
  */
-class Updates extends CI_Model {
-
-    var $data = array(
-        array('id' => '1', 'title' => 'COACH COMMENT', 'link' => '/team', 'comment'=>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm......'),
-        array('id' => '2', 'title' => 'SCHEDULE', 'link' => '/team', 'comment'=>'Saturday September 15 Dragons vs Bros Time:8:30 Location:Holy Park'),
-        array('id' => '3', 'title' => 'CAPTAIN COMMENT', 'link' => '/team', 'comment'=>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm......'),
-
-    );
+class Updates extends MY_Model {
+    // constructor
+    function __construct() {
+        parent::__construct('updates');
+    }
 
     // retrieve recent 3 updates
     public function recent() {
-        return array_slice($this->data,0,3);
+        $highest = $this->updates->highest();
+        $this->db->where('id <=', $highest);
+        $this->db->where('id >', $highest-3);
+        $this->db->order_by("id", "desc"); 
+
+        $updates = $this->db->get('updates');
+        return $updates->result();
     }
 
 

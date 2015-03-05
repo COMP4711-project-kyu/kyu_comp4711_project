@@ -26,6 +26,9 @@ class Welcome extends Application {
                $this->data[$name] = $row;
             }
             
+            // set announcement
+            $this->data['announce'] = $this->keyvalue->get("ANNOUNCEMENT")->value;
+            
             //set updates
             $updates = $this->updates->recent();
             $output ="";

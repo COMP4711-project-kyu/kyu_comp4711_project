@@ -56,8 +56,8 @@
                 <div class="col-md-6 team_bottom">
                     <ul class="team_list">
                         <h4>Announcement</h4>
-                        <li><a>Activity for Week</a>
-                            <p>The weather forcast says it is going to rain the coming Saturday. We will be playing badminton at ~~gym instead. </p></li>
+                        <li><!--<a>Activity for Week</a>-->
+                            <p>{announce}</p></li>
 
 
                         <h4>Updates</h4>
