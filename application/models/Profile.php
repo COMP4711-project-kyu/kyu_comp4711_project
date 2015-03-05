@@ -6,11 +6,11 @@
  *
  * @author Mao
  */
-class History extends MY_Model {
+class Profile extends MY_Model {
 
     // constructor
     function __construct() {
-        parent::__construct('history');
+        parent::__construct('team');
     }
-
+   
 }
