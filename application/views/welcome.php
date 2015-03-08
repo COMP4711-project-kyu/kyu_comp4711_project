@@ -1,8 +1,8 @@
 
 <!--start slider -->
-<link rel="stylesheet" href="assets/css/fwslider.css" media="all">
-<script src="assets/js/jquery-ui.min.js"></script>
-<script src="assets/js/fwslider.js"></script>
+<link rel="stylesheet" href="/assets/css/fwslider.css" media="all">
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/fwslider.js"></script>
 <!--end slider -->
 
 <!-- start slider -->
@@ -10,7 +10,7 @@
     <div class="slider_container">
         <div class="slide"> 
             <!-- Slide image -->
-            <img src="assets/images/slider1.jpg" class="img-responsive" alt=""/>
+            <img src="/assets/images/slider1.jpg" class="img-responsive" alt=""/>
             <!-- /Slide image -->
             <!-- Texts container -->
             <div class="slide_content">
@@ -24,7 +24,7 @@
         </div>
         <!-- /Duplicate to create more slides -->
         <div class="slide">
-            <img src="assets/images/slider2.jpg" class="img-responsive" alt=""/>
+            <img src="/assets/images/slider2.jpg" class="img-responsive" alt=""/>
             <div class="slide_content">
                 <div class="slide_content_wrap">
                     <h1 class="title">Van Dragons</h1>
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="slide">
-            <img src="assets/images/slider3.jpg" class="img-responsive" alt=""/>
+            <img src="/assets/images/slider3.jpg" class="img-responsive" alt=""/>
             <div class="slide_content">
                 <div class="slide_content_wrap">
                     <h1 class="title">Van Dragons</h1>

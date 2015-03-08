@@ -8,7 +8,7 @@
                     <ul class="team_list">
                         <h4>About Dragons</h4>
                         <p class="m_7">{about}</p>
-                        <img src="assets/images/team/team.jpg" class="img-responsive" alt=""/>
+                        <img src="/assets/images/team/team.jpg" class="img-responsive" alt=""/>
                     </ul>
                 </div>
                 <div class="col-md-4 ">
@@ -26,7 +26,7 @@
             
             <div class="row team_bottom">
                 <div class="col-md-3">
-                    <img src="assets/images/team/{pImg1}" class="img-responsive" title="continue" alt=""/>
+                    <img src="/assets/images/team/{pImg1}" class="img-responsive" title="continue" alt=""/>
                 </div>
 
                 <div class="col-md-3">
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <img src="assets/images/team/{pImg2}" class="img-responsive" title="continue" alt=""/>
+                    <img src="/assets/images/team/{pImg2}" class="img-responsive" title="continue" alt=""/>
                 </div>
 
                 <div class="col-md-3">

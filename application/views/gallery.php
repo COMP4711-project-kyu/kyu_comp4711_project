@@ -1,6 +1,6 @@
 <!-- light-box -->
-	<script type="text/javascript" src="assets/js/jquery.fancybox.js"></script>
-	<link rel="stylesheet" type="text/css" href="assets/css/jquery.fancybox.css" media="screen" />
+	<script type="text/javascript" src="/assets/js/jquery.fancybox.js"></script>
+	<link rel="stylesheet" type="text/css" href="/assets/css/jquery.fancybox.css" media="screen" />
    <script type="text/javascript">
 		$(document).ready(function() {
 			/*
@@ -38,10 +38,9 @@
                         
 </div>
                     <div style="display: table;margin: 0 auto;">
-           <img src="assets/images/arrowleft.png" >
-                        1/5
-                        <img src="assets/images/arrowright.png" >
-                    
+                        {left_arrow}
+                        {page} / {num_page}
+                        {right_arrow}                    
                     </div>
 	   </div>
          

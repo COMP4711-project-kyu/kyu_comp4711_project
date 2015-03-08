@@ -12,8 +12,7 @@ class Welcome extends Application {
 	public function index()
 	{
             // get recent pictures
-            $highest = $this->images->highest();
-            $pix = $this->images->getGroup($highest,4);
+            $pix = $this->images->getRecentImg(4);
             for ($num = 1, $index = 0; $num <= 2; $num++){
                 $row ="";
                 // set 3 image in a cell for row
