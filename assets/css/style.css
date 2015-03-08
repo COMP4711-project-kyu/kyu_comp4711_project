@@ -8,6 +8,9 @@ html, body{
 	background:#fff;
 	font-size: 100%;
 }
+.error{
+    color:#E92546;
+}
 body a{
  	transition: 0.5s all;
 	-webkit-transition: 0.5s all;

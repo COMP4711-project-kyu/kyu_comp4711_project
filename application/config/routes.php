@@ -88,6 +88,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['gallery/(:any)/(:num)'] = "gallery/album/$1/$2";
+$route['gallery/(:any)'] = "gallery/album/$1";
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

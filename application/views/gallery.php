@@ -17,13 +17,11 @@
 			<div class="row ex_box">
 				<h3 class="m_2">Gallery</h3>
                                 <dl id="sample" class="dropdown">
-                                    <dt><a href="#"><span><h4>All Pictures</h4></span></a></dt>
+                                    <dt><a href="#"><span><h4>{album}</h4></span></a></dt>
 				        <dd>
 				            <ul>
-				                <li><a href="#">All Pictures</a></li>
-				                <li><a href="#">May 30, 2014</a></li>
-				                <li><a href="#">Oct 10, 2013</a></li>
-				                <li><a href="#">Sep 23, 2013</a></li>
+				                <li><a href="/gallery">All Pictures</a></li>
+                                                {album_link}
 				               </ul>
 				         </dd>
                                 </dl>
