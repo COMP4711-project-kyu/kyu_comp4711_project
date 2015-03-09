@@ -131,34 +131,34 @@ class Team extends Application {
             $event[] = $this->input->post('event' . $i);
             $date[] = $this->input->post('date' . $i);
         }
-        $event_errors=$this->validationForEvent($event, $numHistoryFeild-1);
-        $date_errors =$this->validationForDate($date, $numHistoryFeild-1);
+        $event_errors = $this->validationForEvent($event, $numHistoryFeild - 1);
+        $date_errors = $this->validationForDate($date, $numHistoryFeild - 1);
         // save if there is no error
         $result = array();
         if ($this->isEmpty($event_errors) && $this->isEmpty($date_errors)) {
-            $result = $this->saveHistory($event,$date);
+            $result = $this->saveHistory($event, $date);
         }
         if (@$result['ifSaved']) {
             $this->data['history_error'] = "History is successfully saved";
             $this->updates->addUpdate("History", "/team", $result['updateMsg']);
         }
-        
+
         // set fields
         $this->data['about'] = $this->profile->get(0)->description;
         $this->setP1();
         $this->setP2();
-        
+
         $errors['event'] = $event_errors;
         $errors['date'] = $date_errors;
         $this->setHistory($errors);
-        
+
         $this->data['pagebody'] = 'admin/team';
         $this->render('Team', "admin");
     }
-    
+
     // lastIndex is the index of the last field which is new history
-    function validationForEvent($event, $lastIndex){
-        for($i = 0; $i < $lastIndex; $i++) {
+    function validationForEvent($event, $lastIndex) {
+        for ($i = 0; $i < $lastIndex; $i++) {
             if (strlen($event[$i]) > 50) {
                 $event_errors[] = "Event has to be under 50 letters long";
             } else if (empty($event[$i])) {
@@ -167,31 +167,31 @@ class Team extends Application {
                 $event_errors[] = "";
             }
         }
-       // if the last field is not empty, validate
-        if(!empty($event[$lastIndex])){
+        // if the last field is not empty, validate
+        if (!empty($event[$lastIndex])) {
             if (strlen($event[$lastIndex]) > 50) {
                 $event_errors[] = "Event has to be under 50 letters long";
             } else {
                 $event_errors[] = "";
             }
-        }else{
+        } else {
             $event_errors[] = "";
         }
-        
+
         return $event_errors;
     }
-    
-    function isEmpty($array){
+
+    function isEmpty($array) {
         $size = count($array);
-        for($i = 0; $i<$size ; $i++){
-            if(!empty($array[$i]))
+        for ($i = 0; $i < $size; $i++) {
+            if (!empty($array[$i]))
                 return false;
         }
         return true;
     }
-    
-    function validationForDate($date, $lastIndex){
-        for($i = 0; $i < $lastIndex; $i++) {
+
+    function validationForDate($date, $lastIndex) {
+        for ($i = 0; $i < $lastIndex; $i++) {
             if (strlen($date[$i]) > 20) {
                 $date_errors[] = "Date has to be under 20 letters long";
             } else if (empty($date[$i])) {
@@ -201,47 +201,48 @@ class Team extends Application {
             }
         }
         // if the last field is not empty, validate
-        if(!empty($date[$lastIndex])){
+        if (!empty($date[$lastIndex])) {
             if (strlen($date[$lastIndex]) > 50) {
                 $date_errors[] = "Event has to be under 50 letters long";
             } else {
                 $date_errors[] = "";
             }
-        }else{
+        } else {
             $date_errors[] = "";
         }
         return $date_errors;
     }
+
     // save events if there is no error
     // return if any data is saved
-    function saveHistory($event,$date){
-          $ifSaved = false;
-          $updateMsg = ""; // saved as update when history is saved and shown on Home page
-            $savedHistories = $this->history->all();
-            $i = 0;
-            foreach ($savedHistories as $saved) {
-                if (strcmp($saved->event, $event[$i]) != 0 ||
-                        strcmp($saved->date, $date[$i]) != 0) {// if data is changed, save
-                    $saved->event = $event[$i];
-                    $saved->date = $date[$i];
-                    $this->history->update($saved);
-                    $ifSaved = true;
-                    $updateMsg .= $event[$i] . " is updated. <br/>";
-                }
-                $i++;
-            }
-            // if new data is saved
-            $maxIndex = count($event)-1;
-            if (strlen($event[$maxIndex]) > 0 && strlen($date[$maxIndex]) > 0) {
-                $newEvent = $this->history->create();
-                $newEvent->event = $event[$maxIndex];
-                $newEvent->date = $date[$maxIndex];
-                $this->history->add($newEvent);
+    function saveHistory($event, $date) {
+        $ifSaved = false;
+        $updateMsg = ""; // saved as update when history is saved and shown on Home page
+        $savedHistories = $this->history->all();
+        $i = 0;
+        foreach ($savedHistories as $saved) {
+            if (strcmp($saved->event, $event[$i]) != 0 ||
+                    strcmp($saved->date, $date[$i]) != 0) {// if data is changed, save
+                $saved->event = $event[$i];
+                $saved->date = $date[$i];
+                $this->history->update($saved);
                 $ifSaved = true;
-                $updateMsg .= $event[$maxIndex] . " is added. <br/>";
+                $updateMsg .= $event[$i] . " is updated. <br/>";
             }
-            $result['ifSaved'] = $ifSaved;
-            $result['updateMsg'] = $updateMsg;
+            $i++;
+        }
+        // if new data is saved
+        $maxIndex = count($event) - 1;
+        if (strlen($event[$maxIndex]) > 0 && strlen($date[$maxIndex]) > 0) {
+            $newEvent = $this->history->create();
+            $newEvent->event = $event[$maxIndex];
+            $newEvent->date = $date[$maxIndex];
+            $this->history->add($newEvent);
+            $ifSaved = true;
+            $updateMsg .= $event[$maxIndex] . " is added. <br/>";
+        }
+        $result['ifSaved'] = $ifSaved;
+        $result['updateMsg'] = $updateMsg;
         return $result;
     }
 
@@ -249,7 +250,7 @@ class Team extends Application {
         $title = $this->input->post('pTitle' . $num);
         $name = $this->input->post('pName' . $num);
         $description = $this->input->post('pDescription' . $num);
-
+        $imageName = $this->saveImage($num);
         // validation
         if (empty($title)) {
             $this->errors[] = 'Title is required.';
@@ -274,10 +275,15 @@ class Team extends Application {
             $saved = $this->profile->get($num);
             if (strcmp($saved->description, $description) != 0 ||
                     strcmp($saved->title, $title) != 0 ||
-                    strcmp($saved->name, $name) != 0) { // if data is changed, save
+                    strcmp($saved->name, $name) != 0 ||count($imageName)>0 ) { // if data is changed, save
                 $saved->description = $description;
                 $saved->title = $title;
                 $saved->name = $name;
+                var_dump($imageName);
+                echo $imageName;
+                if(count($imageName)>0){
+                    $saved->image_path = $imageName;
+                }
                 $this->profile->update($saved);
                 $this->errors[] = 'Profile for ' . $title . ' is successfully saved.';
                 $this->updates->addUpdate($title . "'s profile", "/team", $description);
@@ -291,6 +297,30 @@ class Team extends Application {
         }
         $this->data['p' . $num . '_error'] = $message;
         $this->showPage();
+    }
+
+    function saveImage($num) {
+        if (isset($_FILES["pImage" . $num])) {
+            var_dump('yay');
+            $image = $_FILES["pImage" . $num];
+            $name = $image['name'];
+            $tmp_name = $image['tmp_name'];
+            $imgtype = $image['type'];
+            if ($imgtype != 'image/jpeg' && $imgtype != 'image/png'&&
+                    $imgtype != 'image/jpg'&&$imgtype != 'image/gif')
+                $this->errors[] .="Image has to be jpeg, jpg, png or gif file";
+            else {
+                //$imagename = time() . $name;
+                $imagename = "pImage" . $num.".". pathinfo($name, PATHINFO_EXTENSION);;
+                $upload_path = APPPATH."../assets/images/team/" . $imagename;
+                if (move_uploaded_file($tmp_name, $upload_path)) {
+                    return $imagename;
+                } else {
+                    $this->errors[] .="Image uploading failed";
+                }
+            }
+        }
+        return "";
     }
 
     function showPage() {

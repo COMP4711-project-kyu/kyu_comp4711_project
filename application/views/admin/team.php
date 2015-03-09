@@ -38,10 +38,11 @@
             </div>
 
             <div class="row team_bottom">
-                                <form method="post" action="/admin/team/confirm/p1">
+                                <form method="post" enctype="multipart/form-data" action="/admin/team/confirm/p1">
 
                 <div class="col-md-3 admin">
                     <img src="/assets/images/team/{pImg1}" class="img-responsive" title="continue" alt=""/>
+                    <input name="pImage1" type="file"><br>
                     <div class="error">{p1_error}</div>
                 </div>
                     <div class="col-md-3 admin">
@@ -55,10 +56,11 @@
                     </div>
                     
                 </form>
-                <form method="post" action="/admin/team/confirm/p2">
+                <form method="post" enctype="multipart/form-data" action="/admin/team/confirm/p2">
 
                 <div class="col-md-3 admin">
                     <img src="/assets/images/team/{pImg2}" class="img-responsive" title="continue" alt=""/>
+                    <input name="pImage2" type="file"><br>
                     <div class="error">{p2_error}</div>
                 </div>
                     <div class="col-md-3 admin">
