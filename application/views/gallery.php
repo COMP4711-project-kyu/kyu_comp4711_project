@@ -1,6 +1,6 @@
 <!-- light-box -->
-	<script type="text/javascript" src="/assets/js/jquery.fancybox.js"></script>
-	<link rel="stylesheet" type="text/css" href="/assets/css/jquery.fancybox.css" media="screen" />
+	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" media="screen" />
    <script type="text/javascript">
 		$(document).ready(function() {
 			/*
@@ -17,11 +17,13 @@
 			<div class="row ex_box">
 				<h3 class="m_2">Gallery</h3>
                                 <dl id="sample" class="dropdown">
-                                    <dt><a href="#"><span><h4>{album}</h4></span></a></dt>
+                                    <dt><a href="#"><span><h4>All Pictures</h4></span></a></dt>
 				        <dd>
 				            <ul>
-				                <li><a href="/gallery">All Pictures</a></li>
-                                                {album_link}
+				                <li><a href="#">All Pictures</a></li>
+				                <li><a href="#">May 30, 2014</a></li>
+				                <li><a href="#">Oct 10, 2013</a></li>
+				                <li><a href="#">Sep 23, 2013</a></li>
 				               </ul>
 				         </dd>
                                 </dl>
@@ -32,13 +34,13 @@
 		    </div>
 		    <div class="row ex_box">
 			  {img_row3}
-                    </div>
-                        
-</div>
+			   </div>
+		    </div>
                     <div style="display: table;margin: 0 auto;">
-                        {left_arrow}
-                        {page} / {num_page}
-                        {right_arrow}                    
+           <img src="images/arrowleft.png" >
+                        1/5
+                        <img src="images/arrowright.png" >
+                    
                     </div>
 	   </div>
          
