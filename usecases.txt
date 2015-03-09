@@ -19,6 +19,7 @@ Usecases
 
 2. Schedule will be populated from their league's website
 
-3. Logged in users will modify data.
+3. Admin will modify data.
+*right now, we can access admin page by clicking on the lock button on the right of the page
 
-4. Updates will be created whenever logged in users modify data, stored in database and auto populated in Home page.sca
+4. Updates will be created whenever logged in users modify data, stored in database and auto populated in Home page.
