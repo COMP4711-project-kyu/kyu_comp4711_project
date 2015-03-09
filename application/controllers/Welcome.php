@@ -11,13 +11,24 @@ class Welcome extends Application {
 	 */
 	public function index()
 	{
+            $this->setRecentPictures();
+            // set announcement
+            $this->data['announce'] = $this->keyvalue->get("ANNOUNCEMENT")->value;
+            //set updates
+            $this->setUpdates();
+            
+            $this->data['pagebody'] = 'welcome';
+            $this->render('Home');
+	}
+        
+        function setRecentPictures(){
             // get recent pictures
             $pix = $this->images->getRecentImg(4);
             for ($num = 1, $index = 0; $num <= 2; $num++){
                 $row ="";
                 // set 3 image in a cell for row
                 for($count = 0; $count < 2; $count++ ){
-                    $row .= $this->parser->parse ('_cell_2',(array) $pix[$index], true);
+                    $row .= $this->parser->parse ('components/_imagecell_2',(array) $pix[$index], true);
                     $index++;
                 }
                 $name = 'img_row'.$num;
@@ -25,20 +36,15 @@ class Welcome extends Application {
                $this->data[$name] = $row;
             }
             
-            // set announcement
-            $this->data['announce'] = $this->keyvalue->get("ANNOUNCEMENT")->value;
-            
-            //set updates
+        }
+        function setUpdates(){
             $updates = $this->updates->recent();
             $output ="";
             foreach($updates as $update){
-                    $output .= $this->parser->parse ('_update',(array) $update, true);
+                    $output .= $this->parser->parse ('components/_update',(array) $update, true);
                 }
             $this->data['updates']=$output;
-            
-            $this->data['pagebody'] = 'welcome';
-            $this->render('Home');
-	}
+        }
 }
 
 /* End of file welcome.php */

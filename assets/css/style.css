@@ -1224,7 +1224,7 @@ p.m_8{
 	float:left;
 	width:50%;
 }
-.to input[type="text"] {
+.to input[type="text"], .admin input[type="text"]{
 	padding: 10px;
 	width:95%;
 	font-size: 0.85em;
@@ -1244,7 +1244,7 @@ p.m_8{
 	width:50%;
 	float:left;
 }
-.text input[type="text"], .text textarea {
+.text input[type="text"], .text textarea, .admin textarea{
 	width:100%;
 	font-size: 0.85em;
 	margin: 10px 0;
@@ -1257,6 +1257,26 @@ p.m_8{
 	padding: 10px;
 	resize: none;
 	border:1px solid #DFE0E2;
+}
+
+.admin #info{
+    height: 300px;
+    width:100%;
+}
+.admin #about{
+     height: 150px;
+    width:100%;
+}
+
+.admin #history{
+    height: 700px;
+    width:100%;
+}
+.errorhistory input[type="submit"] {
+	background:#333;
+}
+.admin .pDescription{
+    height: 300px;
 }
 .form-submit{
 	float:right;

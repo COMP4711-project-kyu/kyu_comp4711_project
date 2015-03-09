@@ -18,8 +18,8 @@ class Gallery extends Application {
             // get latest 9 pictures
             $pix = $this->images->getRecentImg(9);
             $this->setImages($pix);
-            $this->data['pagebody'] = 'gallery';
-            $this->render('Gallery');
+            $this->data['pagebody'] = 'admin/gallery';
+            $this->render('Gallery', "admin");
 	}
         
         // this function is called when URL is like gallery/(:any)/(:num) or gallery/(:any)/
@@ -38,8 +38,8 @@ class Gallery extends Application {
             $this->setAlbumLinks();//set links for dropdown list
             $pix = $this->images->getGroupByAlbum($page, 9 ,$album);
             $this->setImages($pix);
-            $this->data['pagebody'] = 'gallery';
-            $this->render('Gallery');
+            $this->data['pagebody'] = 'admin/gallery';
+            $this->render('Gallery', "admin");
 	}
         
         //set images in a table

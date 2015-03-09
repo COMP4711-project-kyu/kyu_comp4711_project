@@ -5,4 +5,4 @@
  */
 ?>
 <li><a href="{link}">{title} updated</a>
-  <p>{comment}</p></li>
+    <p>{date}<br/>{comment}</p></li>

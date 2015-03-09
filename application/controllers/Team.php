@@ -32,7 +32,7 @@ class Team extends Application {
             $histories = $this->history->all();
             $table = "";
             foreach($histories as $history){
-                $table .= $this->parser->parse ('_history',(array) $history, true);
+                $table .= $this->parser->parse ('components/_history',(array) $history, true);
             }
             $this->data['history'] = $table;            
             $this->data['pagebody'] = 'team';

@@ -22,7 +22,6 @@ class Images extends MY_Model {
 
     // retrieve $num images from specified index with album name $album
     public function getGroupByAlbum($page, $num, $album) {
-        var_dump($album);
         if(strcmp($album, "All") != 0 ){//if the album is selected
              $this->db->where("album = ", $album);
         }
