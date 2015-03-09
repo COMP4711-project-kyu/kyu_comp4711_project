@@ -10,7 +10,7 @@ class Application extends CI_Controller {
     protected $data = array();      // parameters for view components
     protected $id;		  // identifier for our content
     protected $choices = array(// our menu navbar
-        'Home' => '/', 'Team'=>'/team', 'Gallery'=>'/gallery', 'Contact' => '/Contact'  
+        'Home' => '/', 'Team'=>'/team', 'Gallery'=>'/gallery', 'Contact' => '/contact'  
     );
 
     /**
@@ -24,13 +24,25 @@ class Application extends CI_Controller {
         $this->data['pagetitle'] = 'Van Dragons';
     }
 
-     function render($pagetitle)
-    {
-        $this->data['menubar'] = build_menu_bar($this->choices, $pagetitle);
+     function render($pagetitle, $role = ""){
+         // change links by role
+        $newChoices = array();
+        foreach($this->choices as $name=>$choice){
+            $newChoices[$name] = $role.$choice;
+        }
+        $this->data['menubar'] = build_menu_bar($newChoices, $pagetitle);
         if(strcmp($pagetitle,"Home") == 0 ){
             $pagetitle = "";
         }else{ 
             $pagetitle .=" - ";
+        }
+        
+        if(strcmp($role ,"admin") == 0){
+            $this->data["role_color"] = "#680000" ;
+        }else if(strcmp($role,"team")==0){
+            $this->data["role_color"] = "#003399" ;
+        }else{
+            $this->data['role_color'] = "#000";
         }
         $this->data['pagetitle'] = $pagetitle.'Van Dragons';
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);

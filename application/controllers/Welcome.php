@@ -11,32 +11,40 @@ class Welcome extends Application {
 	 */
 	public function index()
 	{
-            
-
-            // get recent pictures            
-            $pix = $this->images->recent();
-            $num = 1;
-            for ($index = 0; $index < 3;  $num++){
-                $row ="";
-                // set in a cell
-                for($i = 0; $i<2 ;$i++, $index++){
-                    $row .= $this->parser->parse ('_cell_2',(array) $pix[$index], true);
-                }
-                $name = 'img_row'.$num;
-               $this->data[$name] = $row;
-            }
-            
+            $this->setRecentPictures();
+            // set announcement
+            $this->data['announce'] = $this->keyvalue->get("ANNOUNCEMENT")->value;
             //set updates
-            $updates = $this->updates->recent();
-            $output ="";
-            foreach($updates as $update){
-                    $output .= $this->parser->parse ('_update',(array) $update, true);
-                }
-            $this->data['updates']=$output;
+            $this->setUpdates();
             
             $this->data['pagebody'] = 'welcome';
             $this->render('Home');
 	}
+        
+        function setRecentPictures(){
+            // get recent pictures
+            $pix = $this->images->getRecentImg(4);
+            for ($num = 1, $index = 0; $num <= 2; $num++){
+                $row ="";
+                // set 3 image in a cell for row
+                for($count = 0; $count < 2; $count++ ){
+                    $row .= $this->parser->parse ('components/_imagecell_2',(array) $pix[$index], true);
+                    $index++;
+                }
+                $name = 'img_row'.$num;
+                // set img_row$num 
+               $this->data[$name] = $row;
+            }
+            
+        }
+        function setUpdates(){
+            $updates = $this->updates->recent();
+            $output ="";
+            foreach($updates as $update){
+                    $output .= $this->parser->parse ('components/_update',(array) $update, true);
+                }
+            $this->data['updates']=$output;
+        }
 }
 
 /* End of file welcome.php */

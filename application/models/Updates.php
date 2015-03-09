@@ -6,18 +6,42 @@
  *
  * @author Mao
  */
-class Updates extends CI_Model {
-
-    var $data = array(
-        array('id' => '1', 'title' => 'COACH COMMENT', 'link' => '/team', 'comment'=>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm......'),
-        array('id' => '2', 'title' => 'SCHEDULE', 'link' => '/team', 'comment'=>'Saturday September 15 Dragons vs Bros Time:8:30 Location:Holy Park'),
-        array('id' => '3', 'title' => 'CAPTAIN COMMENT', 'link' => '/team', 'comment'=>'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonumm......'),
-
-    );
+class Updates extends MY_Model {
+    // constructor
+    function __construct() {
+        parent::__construct('updates');
+    }
 
     // retrieve recent 3 updates
     public function recent() {
-        return array_slice($this->data,0,3);
+        $this->db->order_by("id", "desc"); 
+        $updates = $this->db->get('updates',3);
+        return $updates->result();
+    }
+    
+    public function addUpdate($title, $link, $comment){
+        $update = $this->updates->create();
+ 
+        $update->title = $title;
+        $update->link = $link;
+        // shorten comment if it's too long
+        if(strlen($comment)>80){
+            $comment = substr($comment, 0, 80)."......";
+        }
+        $update->comment = $comment;
+        // set date and time
+        date_default_timezone_set("America/Vancouver");
+        $update->date = date("F j, Y, g:i a");
+        
+        $this->updates->add($update);
+        
+        // if there are more than 3 data, delete the oldest data;
+        if($this->updates->size()>3){
+            $this->db->limit(1);
+            $firstRecord = $this->db->get($this->_tableName)->result();
+            $this->updates->delete($firstRecord[0]->id);
+        }
+
     }
 
 
