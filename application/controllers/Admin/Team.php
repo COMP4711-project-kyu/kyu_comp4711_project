@@ -275,13 +275,13 @@ class Team extends Application {
             $saved = $this->profile->get($num);
             if (strcmp($saved->description, $description) != 0 ||
                     strcmp($saved->title, $title) != 0 ||
-                    strcmp($saved->name, $name) != 0 ||count($imageName)>0 ) { // if data is changed, save
+                    strcmp($saved->name, $name) != 0 || count($imageName) > 0) { // if data is changed, save
                 $saved->description = $description;
                 $saved->title = $title;
                 $saved->name = $name;
                 var_dump($imageName);
                 echo $imageName;
-                if(count($imageName)>0){
+                if (count($imageName) > 0) {
                     $saved->image_path = $imageName;
                 }
                 $this->profile->update($saved);
@@ -306,17 +306,23 @@ class Team extends Application {
             $name = $image['name'];
             $tmp_name = $image['tmp_name'];
             $imgtype = $image['type'];
-            if ($imgtype != 'image/jpeg' && $imgtype != 'image/png'&&
-                    $imgtype != 'image/jpg'&&$imgtype != 'image/gif')
+            $size = $image['size'];
+            if ($imgtype != 'image/jpeg' && $imgtype != 'image/png' &&
+                    $imgtype != 'image/jpg' && $imgtype != 'image/gif')
                 $this->errors[] .="Image has to be jpeg, jpg, png or gif file";
             else {
-                //$imagename = time() . $name;
-                $imagename = "pImage" . $num.".". pathinfo($name, PATHINFO_EXTENSION);;
-                $upload_path = APPPATH."../assets/images/team/" . $imagename;
-                if (move_uploaded_file($tmp_name, $upload_path)) {
-                    return $imagename;
+                if ($size > 1024 * 100) {
+                    $this->errors[] .="The file is too large";
                 } else {
-                    $this->errors[] .="Image uploading failed";
+                    //$imagename = time() . $name;
+                    $imagename = "pImage" . $num . "." . pathinfo($name, PATHINFO_EXTENSION);
+                    ;
+                    $upload_path = APPPATH . "../assets/images/team/" . $imagename;
+                    if (move_uploaded_file($tmp_name, $upload_path)) {
+                        return $imagename;
+                    } else {
+                        $this->errors[] .="Image uploading failed";
+                    }
                 }
             }
         }
