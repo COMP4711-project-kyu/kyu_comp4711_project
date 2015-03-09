@@ -75,7 +75,7 @@ if (!defined('APPPATH'))
 
                         <div class="header_right">
                             <ul class="icon1 sub-icon1 profile_img">
-                                <li><a class="active-icon c1" href="#"> </a>
+                                <li><a class="active-icon c1" href="/admin"> </a>
                                     <ul class="sub-icon1 list">
                                         <div class="product_control_buttons">
                                             <form action="" method="post" name="login" id="login-form">

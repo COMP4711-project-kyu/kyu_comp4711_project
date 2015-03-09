@@ -2,6 +2,8 @@
 <div class="main">
     <div class="shop_top">
         <div class="container">
+            <form method="post" action="/admin/contact/confirm">
+
             <div class="row">
                 <div class="col-md-7">
                     <div class="map">
@@ -13,17 +15,17 @@
                         <div class="admin">
                             Contact Information
                             <textarea id="info" name="info">{info}</textarea>
+                            <div class="error">{info_error}</div>
                         </div>
                     
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 contact">
-                    <form method="post" action="/contact/confirm">
                         <div class="to">
                             Destination Email address
-                            <input id="email" name="email" type="text" class="text" >
-                            <div class="error">{error}</div>
+                            <input id="email" name="email" type="text" class="text" value="{email}" >
+                            <div class="error">{email_error}</div>
                         </div>
                         <div class="text">
                             <div class="form-submit">
@@ -31,9 +33,10 @@
                             </div>
                         </div>
                         <div class="clear"></div>
-                    </form>
                 </div>
             </div>
+                                    </form>
+
         </div>
     </div>
 </div>
