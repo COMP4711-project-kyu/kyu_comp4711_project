@@ -96,7 +96,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
 
-$autoload['libraries'] = array('database','parser');
+$autoload['libraries'] = array('database','parser','upload');
 
 
 /*
@@ -173,7 +173,7 @@ $autoload['language'] = array();
 |	$autoload['model'] = array('first_model' => 'first');
 */
 
-$autoload['model'] = array('images','updates');
+$autoload['model'] = array('images','updates','history','keyvalue','profile');
 
 
 /* End of file autoload.php */
