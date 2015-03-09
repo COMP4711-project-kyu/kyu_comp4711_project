@@ -135,10 +135,9 @@ class Team extends Application {
         $date_errors =$this->validationForDate($date, $numHistoryFeild-1);
         // save if there is no error
         $result = array();
-        if (count($event_errors) <= 0 && count($date_errors) <= 0) {
+        if ($this->isEmpty($event_errors) && $this->isEmpty($date_errors)) {
             $result = $this->saveHistory($event,$date);
         }
-        
         if (@$result['ifSaved']) {
             $this->data['history_error'] = "History is successfully saved";
             $this->updates->addUpdate("History", "/team", $result['updateMsg']);
@@ -178,8 +177,17 @@ class Team extends Application {
         }else{
             $event_errors[] = "";
         }
-        return $event_errors;
         
+        return $event_errors;
+    }
+    
+    function isEmpty($array){
+        $size = count($array);
+        for($i = 0; $i<$size ; $i++){
+            if(!empty($array[$i]))
+                return false;
+        }
+        return true;
     }
     
     function validationForDate($date, $lastIndex){
@@ -218,8 +226,9 @@ class Team extends Application {
                     $saved->date = $date[$i];
                     $this->history->update($saved);
                     $ifSaved = true;
-                    $updateMsg .= $event . " is updated. <br/>";
+                    $updateMsg .= $event[$i] . " is updated. <br/>";
                 }
+                $i++;
             }
             // if new data is saved
             $maxIndex = count($event)-1;
@@ -229,7 +238,7 @@ class Team extends Application {
                 $newEvent->date = $date[$maxIndex];
                 $this->history->add($newEvent);
                 $ifSaved = true;
-                $updateMsg .= $event . " is added. <br/>";
+                $updateMsg .= $event[$maxIndex] . " is added. <br/>";
             }
             $result['ifSaved'] = $ifSaved;
             $result['updateMsg'] = $updateMsg;
