@@ -20,7 +20,7 @@
                     <dt><a href="#"><span><h4>{album}</h4></span></a></dt>
                     <dd>
                         <ul>
-                            <li><a href="/gallery">All Pictures</a></li>
+                            <li><a href="/admin/gallery">All Pictures</a></li>
                             {album_link}
                         </ul>
                     </dd>
@@ -40,11 +40,21 @@
                 {right_arrow}                    
             </div>
 
-            
+            <div class="to">
+                <h2>Upload new pictures</h2><br/>
+                <form action="/admin/gallery/confirm" method="post" enctype="multipart/form-data">
+                    Date<input type='date' name='date'/><br/><br/>
+                    Images<input type="file" id="file" name="files[]" multiple="multiple" accept="image/*" /><br/>
+                    <div class="error">{error}</div><br/>
+                    <div class="form-submit">
+                        <input name="submit" type="submit" id="submit" value="Save">
+                    </div>
+
+                </form>
+
+            </div>
+
         </div>
-
-
-
     </div>
 
 </div>

@@ -89,6 +89,10 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['gallery/(:any)/(:num)'] = "gallery/album/$1/$2";
 $route['gallery/(:any)'] = "gallery/album/$1";
+$route['admin/gallery/(:any)/(:num)'] = "admin/gallery/album/$1/$2";
+$route['admin/gallery/(:any)'] = "admin/gallery/album/$1";
+$route['admin/gallery/confirm'] = "admin/gallery/confirm";
+
 
 
 /* End of file routes.php */
