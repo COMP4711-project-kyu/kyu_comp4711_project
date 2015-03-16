@@ -54,7 +54,7 @@ class Gallery extends Application {
             // set 3 image in a cell for row
             for ($count = 0; $count < 3; $count++) {
                 if ($index < $size) {
-                    $row .= $this->parser->parse('components/_imagecell_3', (array) $pix[$index], true);
+                    $row .= $this->parser->parse('components/_admin_imagecell_3', (array) $pix[$index], true);
                 }
                 $index++;
             }
@@ -102,8 +102,8 @@ class Gallery extends Application {
                 $date = str_replace('-', '', $date);
                 $successPic = $this->saveImages($date);
                 if ($successPic > 0) {
-                    $this->data['error']= $successPic . ' pictures successfully uploaded';
-                }else{
+                    $this->data['error'] = $successPic . ' pictures successfully uploaded';
+                } else {
                     
                 }
             }
@@ -131,19 +131,19 @@ class Gallery extends Application {
                     $this->errors[] = "$name is not a valid format";
                     continue; // Skip invalid file formats
                 } else { // No error found! Move uploaded files 
-                   $pathorg = $path."original/"; 
+                    $pathorg = $path . "original/";
                     if (!file_exists($path)) {
                         mkdir($path, 0777, true); // make directory for the day
-                        mkdir($pathorg, 0777, true);// make directory to save the original file
+                        mkdir($pathorg, 0777, true); // make directory to save the original file
                     }
-                    $imagename = time() . $_FILES["files"]["name"][$f];//set image name
+                    $imagename = time() . $_FILES["files"]["name"][$f]; //set image name
                     // upload image into directory /assets/images/gallery/{date}/original
                     if (move_uploaded_file($_FILES["files"]["tmp_name"][$f], $pathorg . $imagename)) {
                         $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $imagename);
                         $ext = pathinfo($imagename, PATHINFO_EXTENSION);
                         $thumbName = $withoutExt . "_" . "thumb." . $ext; // create thumbnail's name
                         // upload thumbnail
-                        if($this->generateTumb($imagename, $ext, $path, $thumbName)){
+                        if ($this->generateTumb($imagename, $ext, $path, $thumbName)) {
                             // update database
                             $newImg = $this->images->create();
                             $newImg->name = $imagename;
@@ -152,7 +152,7 @@ class Gallery extends Application {
                             $newImg->album = $date;
                             $this->images->add($newImg);
                             $count++;
-                        }else{
+                        } else {
                             $this->errors[] .="Createing thumbnail failed";
                         }
                     } else {
@@ -164,8 +164,8 @@ class Gallery extends Application {
         return $count;
     }
 
-    function generateTumb($imgname, $ext, $thumbpath,$thumbName) {
-        $file_path = $thumbpath."original/" . $imgname; // where the original file is
+    function generateTumb($imgname, $ext, $thumbpath, $thumbName) {
+        $file_path = $thumbpath . "original/" . $imgname; // where the original file is
 
         if ($ext == "gif") {
             $original = imagecreatefromgif($file_path);
@@ -174,19 +174,19 @@ class Gallery extends Application {
         } else if ($ext == "png") {
             $original = imagecreatefrompng($file_path);
         }
-        
+
         // get original height and width of the image
         $originalW = imagesx($original);
         $originalH = imagesy($original);
         // calculate thumbnail's height and width
         $newH = 247;
         $newW = round($originalW / $originalH * 247);
-        
+
         $thumbnail = imageCreateTrueColor($newW, $newH);
 
         imagecopyresampled($thumbnail, $original, 0, 0, 0, 0, $newW, $newH, imagesx($original), imagesy($original));
         //set directory to save
-        $f = $thumbpath. $thumbName;
+        $f = $thumbpath . $thumbName;
         $ret = false;
         if ($ext == "gif") {
             $ret = imagegif($thumbnail, $f, 100);
@@ -197,6 +197,44 @@ class Gallery extends Application {
         }
 
         return $ret;
+    }
+
+    public function delete($album, $imgName) {
+        $img = $this->images->getImg($album, $imgName);
+        $path = APPPATH . "../assets/images/gallery/" . $album . "/"; // path for the album
+        $pathOrg = $path . "original/" . $imgName; // path for original image
+        $pathThumb = $path . $img->thumb_path;
+        if (unlink($pathOrg)) {
+            if (unlink($pathThumb)) {
+                $this->images->delete($img->id);
+                if ($this->is_dir_empty($path . "original/")) { // if the original folder is empty
+                        rmdir($path . "original/"); //delete original directory
+                    if($this->is_dir_empty($path)){
+                        if(rmdir($path)){
+                            redirect("/admin/gallery/");
+                        }
+                    }
+                }else{
+                    redirect("/admin/gallery/" . $album);
+                }
+            } else {
+                var_dump("couldn't delete the thub image");
+            }
+        } else {
+            var_dump("couldn't delete the original image");
+        }
+    }
+
+    function is_dir_empty($dir) {
+        if (!is_readable($dir))
+            return NULL;
+        $handle = opendir($dir);
+        while (false !== ($entry = readdir($handle))) {
+            if ($entry != "." && $entry != "..") {
+                return FALSE;
+            }
+        }
+        return TRUE;
     }
 
 }

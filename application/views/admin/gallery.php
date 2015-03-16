@@ -10,6 +10,16 @@
         $('.fancybox').fancybox();
 
     });
+  function deleteImg(album, path){
+    var newHost = '/admin/gallery/delete/'+album+"/"+path;
+     myRet = confirm("Are you sure to delete this image "+"\""+path+"\"?");
+
+    if (myRet == true) {
+        window.location = newHost;
+        //document.location.href = '/headquarters/designReset';
+    }
+}
+
 </script>
 <div class="main">
     <div class="shop_top">
