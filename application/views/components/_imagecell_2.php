@@ -1,7 +1,7 @@
 <?php
 /*
  * cell for one image
- * 
+ * on home page
  */
 ?>
 
