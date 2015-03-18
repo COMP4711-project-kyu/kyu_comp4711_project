@@ -43,5 +43,14 @@ class Images extends MY_Model {
         $this->db->select("album");
         return $this->db->get($this->_tableName)->result();
     }
+    
+    public function getImg($album, $img){
+        $this->db->where("album = ", $album);
+        $this->db->where("name = ", $img);
+        $query = $this->db->get($this->_tableName);
+        if ($query->num_rows() < 1)
+            return null;
+        return $query->row();
+    }
 
 }
