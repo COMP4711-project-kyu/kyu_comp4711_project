@@ -17,13 +17,40 @@ class Gallery extends Application {
     // show latest 9 pictures from images database
     function setFirstPage() {
         $this->data['page'] = 1;
-        $this->data['num_page'] = floor($this->images->size() / 9) + 1;
-        $this->setArrows("All", 1);
         $this->setAlbumLinks(); //set links for dropdown list
-        $this->data['album'] = "All Pictures";
+        $this->setDataForAllPictures();
         // get latest 9 pictures
         $pix = $this->images->getRecentImg(9);
         $this->setImages($pix);
+        $this->setArrows("All", 1);
+    }
+
+    function setDataForAllPictures() {
+        // number of pages
+        $this->data['num_page'] = floor($this->images->size() / 9) + 1;
+        //set album name
+        $this->data['album'] = "All Pictures";
+        // disabling delete album function
+        $this->data['date'] = "";
+        $this->data['type'] = "hidden";
+        // for uploading photo
+        $this->data['modify'] = "Upload New Pictures";
+        $this->data['upload'] = "";
+        $this->data['method'] = "confirm";
+    }
+
+    function setDataForAlbums($album) {
+        // number of pages
+        $this->data['num_page'] = floor($this->images->getAlbumSize($album) / 9) + 1;
+        //set album name
+        $this->data['album'] = @date_format(DateTime::createFromFormat("Ymd", $album), 'F d, Y');
+        // enabling delete album function
+        $this->data['date'] = $album;
+        $this->data['type'] = "button";
+        // for modifying the date
+        $this->data['modify'] = "Change the Date";
+        $this->data['upload'] = "display: none;";
+        $this->data['method'] = "changeDate/" . $album;
     }
 
     // this function is called when URL is like gallery/(:any)/(:num) or gallery/(:any)/
@@ -31,11 +58,9 @@ class Gallery extends Application {
     public function album($album, $page = 1) {
         $this->data['page'] = $page;
         if (strcmp($album, "All") == 0) {
-            $this->data['num_page'] = floor($this->images->size() / 9) + 1;
-            $this->data['album'] = "All Pictures";
+            $this->setDataForAllPictures();
         } else {
-            $this->data['num_page'] = floor($this->images->getAlbumSize($album) / 9) + 1;
-            $this->data['album'] = date_format(DateTime::createFromFormat("Ymd", $album), 'F d, Y'); //set album name
+            $this->setDataForAlbums($album);
         }
         $this->setArrows($album, $page);
         $this->setAlbumLinks(); //set links for dropdown list
@@ -49,6 +74,11 @@ class Gallery extends Application {
     //set images in a table
     function setImages($pix) {
         $size = count($pix);
+        if ($size <= 0) {
+            $this->data['noImg'] = "No Images";
+        } else {
+            $this->data['noImg'] = "";
+        }
         for ($num = 1, $index = 0; $num <= 3; $num++) {
             $row = "";
             // set 3 image in a cell for row
@@ -111,6 +141,32 @@ class Gallery extends Application {
         $this->setFirstPage();
         $this->data['pagebody'] = 'admin/gallery';
         $this->render('Gallery', "admin");
+    }
+
+    //ToDo
+    public function changeDate($album) {
+        $success = false;
+        if (!empty($_REQUEST)) {
+            $date = $this->input->post('date');
+            if (empty($date)) {
+            } else {
+                $date = str_replace('-', '', $date);
+                $pics = $this->images->some("album", $album);
+                foreach ($pics as $pic) {
+                    $pic->album = $date;
+                    $this->images->update($pic);
+                }
+                $newName = APPPATH . "../assets/images/gallery/" . $date . "/"; // new name
+                $oldName = APPPATH . "../assets/images/gallery/" . $album . "/"; // old name
+                rename($oldName,$newName);
+                $success = true;
+            }
+        }
+        if (!$success) {
+            redirect("/admin/gallery/".$album);
+        } else {
+            redirect("/admin/gallery/".$date);
+        }
     }
 
     function saveImages($date) {
@@ -199,6 +255,7 @@ class Gallery extends Application {
         return $ret;
     }
 
+    // delete sigle image
     public function delete($album, $imgName) {
         $img = $this->images->getImg($album, $imgName);
         $path = APPPATH . "../assets/images/gallery/" . $album . "/"; // path for the album
@@ -208,13 +265,13 @@ class Gallery extends Application {
             if (unlink($pathThumb)) {
                 $this->images->delete($img->id);
                 if ($this->is_dir_empty($path . "original/")) { // if the original folder is empty
-                        rmdir($path . "original/"); //delete original directory
-                    if($this->is_dir_empty($path)){
-                        if(rmdir($path)){
+                    rmdir($path . "original/"); //delete original directory
+                    if ($this->is_dir_empty($path)) {
+                        if (rmdir($path)) {
                             redirect("/admin/gallery/");
                         }
                     }
-                }else{
+                } else {
                     redirect("/admin/gallery/" . $album);
                 }
             } else {
@@ -222,6 +279,33 @@ class Gallery extends Application {
             }
         } else {
             var_dump("couldn't delete the original image");
+        }
+    }
+
+    //delete all photos with the date
+    public function deletealbum($album) {
+        $images = $this->images->some("album", $album);
+        foreach ($images as $img) {
+            $this->images->delete($img->id);
+        }
+        $path = APPPATH . "../assets/images/gallery/" . $album . "/"; // path for the album
+        $pathOrg = $path . "original/"; // path for original image folder
+        $this->deleteFiles($pathOrg);
+        if ($this->is_dir_empty($pathOrg)) {
+            rmdir($pathOrg);
+        }
+        $this->deleteFiles($path);
+        if ($this->is_dir_empty($path)) {
+            rmdir($path);
+        }
+        redirect("/admin/gallery/" . $album);
+    }
+
+    function deleteFiles($path) {
+        $files = glob($path . "*"); // get all file names
+        foreach ($files as $file) { // iterate files
+            if (is_file($file))
+                unlink($file); // delete file
         }
     }
 
